@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts About Earth</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #fact-display {
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .share-buttons a {
+            margin: 5px;
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background-color: #0077b5; /* LinkedIn color */
+            border-radius: 5px;
+        }
+
+        .share-buttons a:first-child {
+            background-color: #1da1f2; /* Twitter color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fun Facts About Earth</h1>
+    </header>
+    <main>
+        <button id="generate-fact">Show Fun Fact</button>
+        <p id="fact-display"></p>
+        <div class="share-buttons">
+            <a id="twitter-share" href="#" target="_blank">Share on Twitter</a>
+            <a id="linkedin-share" href="#" target="_blank">Share on LinkedIn</a>
+        </div>
+    </main>
+    <script>
+        const facts = [
+            "Earth is the only planet in our solar system not named after a god.",
+            "70% of Earth's surface is covered by water.",
+            "Earth's atmosphere is composed of 78% nitrogen, 21% oxygen, and 1% other gases.",
+            "Earth is the densest planet in the solar system.",
+            "The Earth's rotation is gradually slowing, at approximately 17 milliseconds per hundred years.",
+            "Earth has a powerful magnetic field due to its nickel-iron core.",
+            "The Earth's core is as hot as the surface of the sun.",
+            "Earth is the only planet known to support life.",
+            "The Earth orbits the sun at an average speed of 29.78 km/s.",
+            "The Earth's axis is tilted at an angle of 23.5 degrees, which is responsible for the seasons."
+        ];
+
+        const factDisplay = document.getElementById('fact-display');
+        const generateFactButton = document.getElementById('generate-fact');
+        const twitterShareButton = document.getElementById('twitter-share');
+        const linkedinShareButton = document.getElementById('linkedin-share');
+
+        generateFactButton.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const selectedFact = facts[randomIndex];
+            factDisplay.textContent = selectedFact;
+            updateColorScheme(selectedFact);
+            updateShareLinks(selectedFact);
+        });
+
+        function updateColorScheme(fact) {
+            if (fact.includes("water")) {
+                document.body.style.backgroundColor = "#a2d5f2"; // Light blue
+            } else if (fact.includes("atmosphere")) {
+                document.body.style.backgroundColor = "#f7d794"; // Light yellow
+            } else if (fact.includes("core")) {
+                document.body.style.backgroundColor = "#f8a5c2"; // Light pink
+            } else {
+                document.body.style.backgroundColor = "#f0f0f0"; // Default
+            }
+        }
+
+        function updateShareLinks(fact) {
+            const twitterBaseUrl = "https://twitter.com/intent/tweet?text=";
+            const linkedinBaseUrl = "https://www.linkedin.com/sharing/share-offsite/?url=";
+            const encodedFact = encodeURIComponent(fact);
+
+            twitterShareButton.href = `${twitterBaseUrl}${encodedFact}`;
+            linkedinShareButton.href = `${linkedinBaseUrl}${encodedFact}`;
+        }
+    </script>
+</body>
+</html>
